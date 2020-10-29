@@ -38,7 +38,7 @@
       <rightRearJoint>back_right_wheel_hinge</rightRearJoint>
       <wheelSeparation>0.6</wheelSeparation>
       <wheelDiameter>0.2</wheelDiameter>
-      <torque>10</torque>
+      <torque>40</torque>
       <broadcastTF>true</broadcastTF>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>

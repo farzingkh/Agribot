@@ -17,13 +17,13 @@ TrajectoryPlannerROS:
   pdist_scale: 0.6 #0.6
   gdist_scale: 0.5 #0.8
   occdist_scale: 0.03 #0.01
-  heading_lookahead: 0.8 #0.325
+  heading_lookahead: 0.3 #0.325
   heading_score: true
 
   publish_cost_grid_pc: true
 
   xy_goal_tolerance: 0.1
-  yaw_goal_tolerance: 0.6
+  yaw_goal_tolerance: 1
 
   dwa: false
   meter_scoring: true

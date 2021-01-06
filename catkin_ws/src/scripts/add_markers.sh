@@ -5,5 +5,5 @@ xterm -e " home/workspace/Service_Robot/catkin/devel/setup.bash; roslaunch robot
 sleep 5 
 xterm -e " home/workspace/Service_Robot/catkin/devel/setup.bash; roslaunch amcl_localization amcl.launch" &
 sleep 5 
-xterm -e " home/workspace/Service_Robot/catkin/devel/setup.bash; rosrun add_marker add_marker_node"
+xterm -e " home/workspace/Service_Robot/catkin/devel/setup.bash; rosrun add_markers add_markers"
 

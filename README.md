@@ -95,5 +95,5 @@ Use other provided scripts for testing and fine tuning the parameters.
 </pre>
 
 ## Output 
-![ouput](./image/out.gif)
+![ouput](./image/out01.gif)
 

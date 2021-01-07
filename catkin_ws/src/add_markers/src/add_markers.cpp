@@ -75,7 +75,6 @@ public:
     }
     else
     {
-      // return if object not picked before
       ROS_INFO("Marker: Drop object command recieved!");
       _marker.visualization_msgs::Marker::ADD;
       _marker.color.a = 1.0;
@@ -104,7 +103,6 @@ public:
     }
     else
     {
-      // return if object not picked before
       ROS_INFO("Marker: Drop object command recieved!");
       _marker.visualization_msgs::Marker::ADD;
       _marker.color.a = 1.0;
@@ -169,19 +167,11 @@ int main(int argc, char **argv)
   Marker m = Marker(&n);
   if (argc >= 2)
   {
-<<<<<<< HEAD
     if (std::string(argv[1]) == "test")
     {
       ROS_INFO("Marker: Running tests!");
       m.test();
       ROS_INFO("Marker: Testing is done!");
-=======
-    if (argv[1] == "test")
-    {
-      ROS_INFO("Marker: Running tests!");
-      m.test();
-      ROS_INFO("Marker:Testing done!");
->>>>>>> 36a0a0a910ea283c455ee37c570672645e9c6ad9
       return 0;
     }
   }

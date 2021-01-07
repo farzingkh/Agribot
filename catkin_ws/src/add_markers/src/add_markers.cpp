@@ -6,7 +6,6 @@
 class Marker
 {
 public:
-
   Marker(ros::NodeHandle *n)
   {
     ROS_INFO("Marker: Virtual object initialized!");
@@ -75,7 +74,36 @@ public:
     }
     else
     {
-      // return if object not picked before 
+      // return if object not picked before
+      ROS_INFO("Marker: Drop object command recieved!");
+      _marker.visualization_msgs::Marker::ADD;
+      _marker.color.a = 1.0;
+      _marker_pub.publish(_marker);
+    }
+  }
+
+  void dropPick(const std_msgs::Int32& msg)
+  {
+
+    while (_marker_pub.getNumSubscribers() < 1)
+    {
+      if (!ros::ok())
+        return;
+      ROS_WARN_ONCE("Marker: Please create a subscriber to the marker!");
+      sleep(1);
+    }
+
+    // check the states of the object; 1=pick, 0=drop
+    if (msg.data == 1)
+    {
+      ROS_INFO("Marker: Pick object command recieved!");
+      _marker.visualization_msgs::Marker::DELETE;
+      _marker.color.a = 0.0;
+      _marker_pub.publish(_marker);
+    }
+    else
+    {
+      // return if object not picked before
       ROS_INFO("Marker: Drop object command recieved!");
       _marker.visualization_msgs::Marker::ADD;
       _marker.color.a = 1.0;
@@ -88,6 +116,39 @@ public:
     ROS_INFO("Marker: New coordinates received!");
     _marker.pose.position.x = msg->x;
     _marker.pose.position.y = msg->y;
+  }
+
+  void setCoord(const geometry_msgs::Point& msg)
+  {
+    ROS_INFO("Marker: New coordinates received!");
+    _marker.pose.position.x = msg.x;
+    _marker.pose.position.y = msg.y;
+  }
+  
+
+  void test()
+  {
+    geometry_msgs::Point p;
+    // init
+    p.x = 4;
+    p.y = -2;
+    p.z = 0;
+    std_msgs::Int32 gst;
+    gst.data = 0;
+    setCoord(p);
+    dropPick(gst);
+    // pick
+    gst.data = 1;
+    ros::Duration(5).sleep();
+    dropPick(gst);
+    // drop
+    p.x = -5;
+    p.y = -1;
+    p.z = 0;
+    gst.data = 1;
+    setCoord(p);
+    dropPick(gst);
+    ros::Duration(5).sleep();
   }
 
 private:
@@ -104,5 +165,16 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "basic_shapes");
   ros::NodeHandle n;
   Marker m = Marker(&n);
+  if (argc >= 2)
+  {
+    if (argv[1] == "test")
+    {
+      ROS_INFO("Marker: Running tests!");
+      m.test();
+      ROS_INFO("Marker:Testing done!");
+      return 0;
+    }
+  }
   ros::spin();
+  return 0;
 }
